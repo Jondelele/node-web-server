@@ -3,22 +3,23 @@ const hbs = require('hbs');
 
 var app = express();
 
+hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req,  res) => {
-    // res.send('<h1>Hello Express!</h1>');
-    res.send({
-       name: 'Andrew',
-       likes: [
-           'Biking',
-           'Cities'
-       ]
+    res.render('home.hbs', {
+        pageTitle: 'Home Page',
+        currentYear: new Date().getFullYear(),
+        welcomeMessage: 'Welcome to my page!!'
     });
 });
 
 app.get('/about', (req, res) => {
-    res.send('About page');
+    res.render('about.hbs', {
+        pageTitle: 'About Page',
+        currentYear: new Date().getFullYear()
+    });
 });
 
 app.get('/bad', (req, res) => {
